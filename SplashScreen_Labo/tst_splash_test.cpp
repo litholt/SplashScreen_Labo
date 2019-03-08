@@ -15,12 +15,14 @@ private slots:
 
 void Splash_test::testGui()
 {
-    //control of the second bar (the one showing the loading of all the files in progress)
+    //Control of the First bar
+    QVERIFY(getProgress() == 0);//All'inizio
+
+    //Control of the second bar (the one showing the loading of all the files in progress)
     //At 100% the loading was successful
+    QVERIFY(getProgress2() == 100);//Alla fine
 
-    QVERIFY(getProgress2() == 100);
     QVERIFY(windowFlags().testFlag(Qt::WindowTransparentForInput));
-
     QVERIFY(windowFlags().testFlag(Qt::WindowStaysOnTopHint));
 }
 
