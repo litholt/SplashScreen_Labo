@@ -31,6 +31,6 @@ void Splash_test::test_case1()
 
 }
 
-QTEST_MAIN(Splash_test)
+//QTEST_MAIN(Splash_test)
 
 #include "tst_splash_test.moc"

@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/files">
+        <file>splash-720.jpg</file>
+        <file>open.txt</file>
+        <file>ima2.png</file>
+        <file>google.png</file>
+    </qresource>
+</RCC>

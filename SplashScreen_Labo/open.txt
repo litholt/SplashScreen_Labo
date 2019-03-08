@@ -1,0 +1,15 @@
+=================================Open XAMPP===================================
+rubaink@LudiqueR:~$ cd /opt/lampp
+rubaink@LudiqueR:/opt/lampp$ ls
+apache2             icons     🤩🇹🇬manager-linux-x64.run  RELEASENOTES
+bin                 img       manual                 sbin
+build               include   modules                share
+cgi-bin             info      mysql                  temp
+COPYING.thirdparty  lampp     pear                   uninstall
+ctlscript.sh        lib       php                    uninstall.dat
+docs                libexec   phpmyadmin             var
+error               licenses  proftpd                xampp
+etc                 logs      properties.ini
+htdocs              man       README-wsrep
+rubaink@LudiqueR:/opt/lampp$ sudo ./manager-linux-x64.run
+
