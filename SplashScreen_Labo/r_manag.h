@@ -1,5 +1,5 @@
-#ifndef R_MANAG_H
-#define R_MANAG_H
+#ifndef RM_H
+#define RM_H
 
 #include "subject.h"
 #include <QtCore/QString>
@@ -25,15 +25,20 @@ public:
 
     const QString & getMessage() const;
 
+
     void addResource(const QString &resourcename, const QString &filename);
 
     void LoadResource();
 private:
     QList<Observer*>                    m_observers;
     QList<QPair<QString,QString>>       m_resources; // store resourcename and destination file
+    QList<QString>                      m_table;
     QString                             m_folderName;
     int                                 m_level;
     int                                 m_level2;
+    QString                             part_number;
+    int                                 new_file_level;
+    int                                 compt;
     QString                             m_message;
     bool                                m_done;
 
@@ -41,8 +46,8 @@ private:
     void setMessage(const QString &message);
     void setLevel(int level);
     void setLevel2(int level2);
+    void forLevel_2(const QString &name);
     void setDone(bool done);
     void CopyResource(const QPair<QString, QString> &data);
 };
-
-#endif // R_MANAG_H
+#endif // RM_H

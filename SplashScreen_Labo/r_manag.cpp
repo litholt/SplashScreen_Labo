@@ -11,7 +11,7 @@
 
 ResourceManager::ResourceManager(const QString &folderName)
     : m_level{0},m_level2{0}, m_folderName{folderName},
-          m_message{"Init ..."}, m_done{false} {
+          m_message{"Init..."}, m_done{false} {
 }
 
 ResourceManager::~ResourceManager() {
@@ -69,28 +69,36 @@ void ResourceManager::setDone(bool done) {
 void ResourceManager::addResource(const QString &resourcename, const QString &filename) {
     // make_pair(...)
     m_resources.push_back({resourcename, filename});
+    m_table.push_back(filename);
+}
+
+void ResourceManager::forLevel_2(const QString &name){
+
+    compt = 0;
+    while ((!m_table.isEmpty() && m_table[compt] != name)) {
+        compt++ ;
+    }
+    if(name == m_table[compt]){
+
+        setLevel2(compt*100/m_table.size());// reset second progressbar...
+        new_file_level = compt*100/m_table.size();
+
+        QString s = QString::number(compt + 1);
+        QString c = QString::number(m_table.size());
+
+        part_number =" ( " + s + " su " + c + " ) ";
+    }
 }
 
 void ResourceManager::CopyResource(const QPair<QString, QString> &data) {
 
-    QString msg = "LOADING " + data.second + " ...";
+    forLevel_2(data.second); //control level and part of the 2nd bar
+
+    QString msg = "LOADING " + data.second + part_number;
     QString newName = m_folderName + '/' + data.second;
     setMessage(msg);
-    setLevel(0); // reset first progressbar...
 
-    int number;
-    if(data.second == "ima2.png"){
-        setLevel2(0);// reset second progressbar...
-        number = 0;
-    }
-    if(data.second == "open.txt"){
-        setLevel2(100/3);
-        number = 100/3;
-    }
-    if(data.second == "splash-720.jpg"){
-        setLevel2(200/3);
-        number = 200/3;
-    }
+    setLevel(0); // reset the progressbar...
 
     QFile inputFile(data.first); // Load the Qt resource
     QFile outputFile(newName); // Store the new file
@@ -103,23 +111,22 @@ void ResourceManager::CopyResource(const QPair<QString, QString> &data) {
             outputFile.write(inputFile.read(i)); // write a byte
             outputFile.seek(i);  // move to next byte to read
             inputFile.seek(i); // move to next byte to write
-            setLevel(static_cast<int>((float) i / size * 100)); // Calcul pctage
-            setLevel2(number + static_cast<int>((float) i / size * 100/3)); // Calcul pctage
 
+            setLevel(static_cast<int>((float) i / size * 100)); // Calcul pctage
+            setLevel2(new_file_level + static_cast<int>((float) i / size * 100/3)); // Calcul pctage
         }
         inputFile.close();
         outputFile.close();
     }
 
     setLevel(100);
-    if(data.second == "splash-720.jpg"){
+    if((compt + 1) == m_table.size()){
         setLevel2(100);
     }
-
 }
 
 void ResourceManager::LoadResource() {
-    DELAY;
+    //DELAY;
     //setMessage("Creating folder " + m_folderName + "...");
     // create a new folder in the executable directory
     DELAY;

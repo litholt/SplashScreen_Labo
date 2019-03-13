@@ -23,16 +23,7 @@ private:
 public slots:
 
     void setMessage(const QString &message){
-        if(message == "LOADING ima2.png ..."){
-            m_progress_control = "Loading : ima2.png (1 su 3)";
-        }
-        else if(message == "LOADING open.txt ..."){
-            m_progress_control = "Loading : open.txt (2 su 3)";
-        }
-        else if(message == "LOADING splash-720.jpg ..."){
-            m_progress_control = "Loading : splash-720.jpg (3 su 3)";
-        }
-
+        m_progress_control = message.toLower();
         this->clearMessage();
         this->showMessage(message,Qt::AlignBottom,Qt::black);
     }
@@ -60,5 +51,4 @@ public slots:
 protected:
     void drawContents(QPainter *painter);
 };
-
 #endif // SPL_H
